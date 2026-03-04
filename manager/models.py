@@ -20,7 +20,7 @@ class Book(models.Model):
     publication_date = models.DateField()
     price = models.FloatField()
     available = models.BooleanField(default=True)
-
+    portada = models.ImageField(upload_to='portadas/', null=True, blank=True)
 
     def __str__(self):
         return self.title
