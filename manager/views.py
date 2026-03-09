@@ -8,7 +8,9 @@ from rest_framework.permissions import AllowAny
 
 
 class AuthorViewSet(viewsets.ModelViewSet):
-    queryset = Author.objects.all()
+    # pagination_class = None
+    # permission_classes = [AllowAny]
+    queryset = Author.objects.all().order_by("-pk")
     serializer_class = AuthorSerializer
 
 
@@ -20,6 +22,6 @@ class AuthorViewSet(viewsets.ModelViewSet):
 
 
 class BookViewSet(viewsets.ModelViewSet):
-    queryset = Book.objects.all()
-    serializer_class = BookSerializer    
+    queryset = Book.objects.all().order_by("pk")
+    serializer_class = BookSerializer
   
