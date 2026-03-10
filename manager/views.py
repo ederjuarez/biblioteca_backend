@@ -13,7 +13,6 @@ class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all().order_by("-pk")
     serializer_class = AuthorSerializer
 
-
     @action(detail=False, methods=["get"])
     def list_filter(self, request):
         queryset = self.get_queryset().filter(birth_date__year__gte=1950)
@@ -24,4 +23,10 @@ class AuthorViewSet(viewsets.ModelViewSet):
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all().order_by("pk")
     serializer_class = BookSerializer
+    # permission_classes = [AllowAny]
   
+    @action(detail=False, methods=["get"])
+    def books_author(self, request, author_id):        
+        queryset = self.get_queryset().filter(author=author_id)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
