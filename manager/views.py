@@ -14,13 +14,13 @@ class AuthorViewSet(viewsets.ModelViewSet):
     serializer_class = AuthorSerializer
 
     def get_queryset(self):
-        data_filer = self.request.query_params.get("data_filer", None)
+        # data_filer = self.request.query_params.get("data_filer", None)
         queryset = Author.objects.all().order_by("-pk")
-        for value in data_filer:
-            if value == "name":
-                queryset = queryset.filter(name=value)
-            if value == "birth_date":
-                queryset = queryset.filter(birth_date=value)
+        # for value in data_filer:
+        #     if value == "name":
+        #         queryset = queryset.filter(name=value)
+        #     if value == "birth_date":
+        #         queryset = queryset.filter(birth_date=value)
         return queryset
 
 
