@@ -32,8 +32,8 @@ class AuthorViewSet(viewsets.ModelViewSet):
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all().order_by("pk")
     serializer_class = BookSerializer
-    permission_classes = [AllowAny]
-  
+    # permission_classes = [AllowAny]
+
     @action(detail=False, methods=["get"])
     def books_author(self, request, author_id):
         queryset = self.get_queryset().filter(author=author_id)
