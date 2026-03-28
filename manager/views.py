@@ -30,3 +30,10 @@ class BookViewSet(viewsets.ModelViewSet):
     serializer_class = BookSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['author_id']
+    # permission_classes = [AllowAny]
+
+    @action(detail=False, methods=["get"])
+    def books_author(self, request, author_id):
+        queryset = self.get_queryset().filter(author=author_id)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
